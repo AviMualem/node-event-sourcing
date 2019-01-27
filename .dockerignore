@@ -1,0 +1,16 @@
+.vscode/**/*
+.vscode
+dist/**/*
+dist
+node_modules/**/*
+node_modules
+test/**/*
+test
+coverage/**/*
+coverage
+Deployment/**/*
+Deployment
+.npm/**/*
+.npm
+.nyc_output/**/*
+.nyc_output

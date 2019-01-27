@@ -1,0 +1,52 @@
+# Default values for pytestChart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 2
+
+image:
+  repository: 659017097776.dkr.ecr.us-east-1.amazonaws.com/sharegain/avi-pycharm
+  tag: latest
+  pullPolicy: IfNotPresent
+settings:
+  environmentVariables:
+    - name: mongo_connection_string
+      value: "mongodb://mongodb.default.svc.cluster.local:27017/avitests?readPreference=primary"
+
+service:
+  type: ClusterIP
+  port: 3000
+  targetPort: 3000
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefix
+    traefik.frontend.passHostHeader: "true"
+  path: "/{path:[Uu]sers}"
+  hosts:
+    - api-dev-aws.sharegain.com
+    
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
